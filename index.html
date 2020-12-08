@@ -17,7 +17,6 @@
                 <div class="ticker-container">
                     TICKER INPUT
                     <input type="text" class="ticker-input" placeholder="Enter stock ticker"/>
-                    <button id="ticker-input-button"></button>
                 </div> 
 
                 <div class="current-price-container">
@@ -33,22 +32,69 @@
             <div class="wall-street-sentiment-container">
                 <div class="analyst-recommendations">
                     ANALYST RECOMMENDATION BREAKDOWN
+                    <div class="ratings-container">
+                        <div class="buy-rating" id="buy-rating">
+                            BUY
+                        </div>
+                        
+                        <div class="hold-rating" id="hold-rating">
+                            HOLD
+                        </div>
+                        
+                        <div class="sell-rating" id="sell-rating">
+                            SELL
+                        </div>
+                    </div>
                 </div>
                 <div class="price-targets">
                     PRICE TARGET BREAKDOWN
+                    <div class="avg-pt" id="avg-pt">
+
+                    </div>
+                    
+                    <div class="median-pt" id="median-pt">
+
+                    </div>
                 </div>
                 <div class="meaningful-financial-data">
                     FINANCIAL DATA
                     <div class="column-1">
-                        A,B,C
+                        Valuation Multiples
+                        <div class="data-A" id="data-A">
+                            Enterprise Value to Revenue
+                        </div>
+                        <div class="data-B" id="data-B">
+                            Price to Sales
+                        </div>
+                        <div class="data-C" id="data-C">
+                            Price to Book
+                        </div>
                     </div>
                     
                     <div class="column-2">
-                        D,E,F
+                        Relevant Trading Data 
+                        <div class="data-D" id="data-D">
+                            Beta
+                        </div>
+                        <div class="data-E" id="data-E">
+
+                        </div>
+                        <div class="data-F" id="data-F">
+                            Institutional Holders
+                        </div>
                     </div>
                     
                     <div class="column-3">
-                        G,H,I
+                        Financials
+                        <div class="data-G" id="data-G">
+                            
+                        </div>
+                        <div class="data-H" id="data-H">
+                            Profit Margin
+                        </div>
+                        <div class="data-I" id="data-I">
+
+                        </div>
                     </div>
                 </div>
                 <div class="earnings-data">
@@ -59,7 +105,26 @@
     </div>
     <!-- <script src="./app.js"></script> -->
     <script>
-    console.log("testing out the IEX call from this file");
+        const token = "Tpk_28649c4c07fa47cb8ed740349d9f9550"; 
+        const symbol = "AAPL";
+
+        document.addEventListener('keypress', e => {
+            if(e.key === 'Enter'){
+                //grab input from input tag
+                //check if the input is not blank
+                //pass the input into the first API call to get the stock quote data
+                console.log("testing out the IEX call from this file");
+                fetch(`https://sandbox.iexapis.com/stable/time-series/PREMIUM_KAVOUT_KSCORE/${symbol}?token=${token}`)
+                .then((response) => {
+                    response.json()
+                    debugger
+                })
+                .then(data => {
+                    debugger
+                    console.log(data)
+                });
+            }
+        })
     
         // fetch('https://socialsentiment.io/api/v1/stocks/TSLA/sentiment/daily/')
     </script>
