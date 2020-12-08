@@ -1,0 +1,112 @@
+@import url('./reset.css');
+
+.site-container{
+     position:fixed;
+     padding:0;
+     margin:0;
+
+     top:0;
+     left:0;
+
+     width: 100%;
+     height: 100%;
+     background:beige;
+     font-family: 'Life Savers', cursive;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+}
+
+.app-container{
+    display: flex;
+    flex-direction: column;
+    border: 3px solid black;
+    border-radius: 12px;
+    padding: 25px;
+    background-color: white;
+}
+
+/* Section One */
+.company-basic-info{
+    display: flex;
+    
+}
+/* TICKER INPUT FIELD  */
+.ticker-container{
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.ticker-input{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* CURRENT PRICE OUTPUT  */
+.current-price-container{
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* Section Two */
+/* SOCIAL SENTIMENT  */
+.social-sentiment-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+/* CHART  */
+/* Section Three */
+.wall-street-sentiment-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 5px;
+}
+/* ANALYST RECOMMENDATION BREAKDOWN  */
+.analyst-recommendations{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+/* PRICE TARGET BREAKDOWN  */
+.price-targets{
+    padding: 5px;
+}
+/* FINANCIAL DATA  */
+.meaningful-financial-data{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 5px;
+}
+
+/* A,B,C  */
+.column-1{
+    padding: 5px;
+}
+
+/* D,E,F  */
+.column-2{
+    padding: 5px;
+}
+
+/* G,H,I  */
+.column-3{
+    padding: 5px;
+}
+
+
+/* Section Five */
+/* NEXT EARNINGS DATE */
+.earnings-data{
+    padding: 5px;
+}
+
