@@ -16,7 +16,7 @@
             <div class="company-basic-info">
                 <div class="ticker-container">
                     TICKER INPUT
-                    <input type="text" class="ticker-input" placeholder="Enter stock ticker"/>
+                    <input type="text" id="ticker-input" class="ticker-input" placeholder="Enter stock ticker"/>
                 </div> 
 
                 <div class="current-price-container">
@@ -60,14 +60,17 @@
                     FINANCIAL DATA
                     <div class="column-1">
                         Valuation Multiples
-                        <div class="data-A" id="data-A">
+                        <div class="data-A" >
                             Enterprise Value to Revenue
+                            <p id="ev-to-rev"></p>
                         </div>
                         <div class="data-B" id="data-B">
                             Price to Sales
+                            <p id="price-to-sales"></p>
                         </div>
                         <div class="data-C" id="data-C">
-                            Price to Book
+                            PEG Ratio
+                            <p id="peg-ratio"></p>
                         </div>
                     </div>
                     
@@ -75,22 +78,26 @@
                         Relevant Trading Data 
                         <div class="data-D" id="data-D">
                             Beta
+                            <p id="beta"></p>
                         </div>
                         <div class="data-E" id="data-E">
-
+                            TBD
                         </div>
                         <div class="data-F" id="data-F">
                             Institutional Holders
+                            <p id="institutional-holders"></p>
                         </div>
                     </div>
                     
                     <div class="column-3">
                         Financials
                         <div class="data-G" id="data-G">
-                            
+                            Revenue per Employee
+                            <p id="rev-per-employee"></p>
                         </div>
                         <div class="data-H" id="data-H">
                             Profit Margin
+                            <p id="profit-margin"></p>
                         </div>
                         <div class="data-I" id="data-I">
 
@@ -99,28 +106,25 @@
                 </div>
                 <div class="earnings-data">
                     NEXT EARNINGS DATE:
+                    <p id="next-earnings"></p>
                 </div>
             </div>
         </div>
     </div>
     <!-- <script src="./app.js"></script> -->
     <script>
-        const token = "Tpk_28649c4c07fa47cb8ed740349d9f9550"; 
-        const symbol = "AAPL";
+
+        // const symbol = "AAPL";
 
         document.addEventListener('keypress', e => {
             if(e.key === 'Enter'){
-                //grab input from input tag
+                const symbol = document.getElementById("ticker-input").value;
                 //check if the input is not blank
                 //pass the input into the first API call to get the stock quote data
                 console.log("testing out the IEX call from this file");
-                fetch(`https://sandbox.iexapis.com/stable/time-series/PREMIUM_KAVOUT_KSCORE/${symbol}?token=${token}`)
-                .then((response) => {
-                    response.json()
-                    debugger
-                })
+                fetch(`https://cloud.iexapis.com/stable/time-series/PREMIUM_KAVOUT_KSCORE/${symbol}?token=${token}`)
+                .then((response) => response.json())
                 .then(data => {
-                    debugger
                     console.log(data)
                 });
             }

@@ -3,52 +3,36 @@ const app = express();
 const fetch = require('node-fetch');
 global.fetch = require("node-fetch");
 const token = process.env.IEX; 
-const symbol = "TSLA";
+
 app.use(express.static('public'))
 
 document.addEventListener('keypress', e => {
     if(e.key === 'Enter'){
-        //grab symbol from symbol tag
+        const symbol = document.getElementById("ticker-input").value;
         //check if the symbol is not blank
-        //pass the symbol into the first API call to get the stock quote data
         console.log("testing out the IEX call from this file");
         fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${token}`)
-        .then((response) => response.json())
-        .then(data => {
-            console.log(data)
-            console.log(data.close)
-        });
-
+            .then((response) => response.json())
+            .then(data => {
+                document.getElementById("current-price-output").innerHTML=data.iexClose;
+            });
 
         //Advanced Stats -- 
         fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/advanced-stats?token=${token}`)
-        .then((response) => response.json())
-        .then(data => {
-            console.log(data)
-            console.log(data.enterpriseValueToRevenue)
-            console.log(data.priceToBook)
-            console.log(data.priceToSales)
-            console.log(data.beta)
-            console.log(data.profitMargin)
-        });
+            .then((response) => response.json())
+            .then(data => {
+                document.getElementById("ev-to-rev").innerHTML=data.enterpriseValueToRevenue;
+                document.getElementById("price-to-sales").innerHTML=data.priceToSales;
+                document.getElementById("peg-ratio").innerHTML=data.pegRatio;
+                document.getElementById("beta").innerHTML=data.beta;
+                document.getElementById("profit-margin").innerHTML=data.profitMargin;
+                document.getElementById("rev-per-employee").innerHTML=data.revenuePerEmployee;
+            });
     }
 })
 
 
 //DOM event listener -- 
-
-//getting a stock price target
-// /stock/{symbol}/price-target
-
-
-
-
-
-// app.get(`/stock/${symbol}/price-target`, (request, response) => {
-//     fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/price-target?token=${token}`)
-//         .then((response) => response.json())
-//         .then(data => console.log(data));
-// });
 
 // const path = require('path')
 // const PORT = process.env.PORT || 8000; 
@@ -61,3 +45,15 @@ document.addEventListener('keypress', e => {
 //     console.log(__dirname);
 //     console.log(`listening on ${PORT}`)
 // })
+
+
+
+// Fetch example with header
+// fetch('www.example.net', {
+//   method: 'POST',
+//   headers: {
+//     'Content-Type': 'text/plain',
+//     'X-My-Custom-Header': 'value-v',
+//     'Authorization': 'Bearer ' + token,
+//   }
+// });
