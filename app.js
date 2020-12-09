@@ -1,3 +1,10 @@
+var requirejs = require('requirejs');
+requirejs.config({
+    //Pass the top-level main.js/index.js require
+    //function to requirejs so that node modules
+    //are loaded relative to the top-level JS file.
+    nodeRequire: require
+});
 const express = require('express');
 const app = express();
 const fetch = require('node-fetch');
@@ -32,6 +39,13 @@ document.addEventListener('keypress', e => {
 })
 
 
+
+// Kavout Score
+// fetch(`https://cloud.iexapis.com/stable/time-series/PREMIUM_KAVOUT_KSCORE/${symbol}?token=${token}`)
+//                 .then((response) => response.json())
+//                 .then(data => {
+//                     console.log(data)
+//                 });
 //DOM event listener -- 
 
 // const path = require('path')
@@ -57,3 +71,15 @@ document.addEventListener('keypress', e => {
 //     'Authorization': 'Bearer ' + token,
 //   }
 // });
+
+// fetch(`https://socialsentiment.io/api/v1/stocks/${symbol}/sentiment/daily/`, 
+//                 {
+//                     method: 'GET',
+//                     headers: {
+//                         'accept': 'application/json',
+//                         'Authorization': 'Token ' + token,
+//                     }
+//                 })
+//                 .then(res => {
+//                     debugger
+//                 });

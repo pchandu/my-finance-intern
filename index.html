@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Life+Savers:wght@700&family=Playfair+Display&family=Yeon+Sung&display=swap" rel="stylesheet">
     <title>My Finance Intern</title>
+    <!-- <script data-main="./app.js" src="require.js"></script> -->
 </head>
 
 <body>
@@ -58,49 +59,51 @@
                 </div>
                 <div class="meaningful-financial-data">
                     FINANCIAL DATA
-                    <div class="column-1">
-                        Valuation Multiples
-                        <div class="data-A" >
-                            Enterprise Value to Revenue
-                            <p id="ev-to-rev"></p>
+                    <div class="financial-data-container">
+                        <div class="column-1">
+                            Valuation Multiples
+                            <div class="data-A" >
+                                Enterprise Value to Revenue
+                                <p id="ev-to-rev"></p>
+                            </div>
+                            <div class="data-B" id="data-B">
+                                Price to Sales
+                                <p id="price-to-sales"></p>
+                            </div>
+                            <div class="data-C" id="data-C">
+                                PEG Ratio
+                                <p id="peg-ratio"></p>
+                            </div>
                         </div>
-                        <div class="data-B" id="data-B">
-                            Price to Sales
-                            <p id="price-to-sales"></p>
+                        
+                        <div class="column-2">
+                            Relevant Trading Data 
+                            <div class="data-D" id="data-D">
+                                Beta
+                                <p id="beta"></p>
+                            </div>
+                            <div class="data-E" id="data-E">
+                                TBD
+                            </div>
+                            <div class="data-F" id="data-F">
+                                TBD
+                                <p id="institutional-holders"></p>
+                            </div>
                         </div>
-                        <div class="data-C" id="data-C">
-                            PEG Ratio
-                            <p id="peg-ratio"></p>
-                        </div>
-                    </div>
-                    
-                    <div class="column-2">
-                        Relevant Trading Data 
-                        <div class="data-D" id="data-D">
-                            Beta
-                            <p id="beta"></p>
-                        </div>
-                        <div class="data-E" id="data-E">
-                            TBD
-                        </div>
-                        <div class="data-F" id="data-F">
-                            Institutional Holders
-                            <p id="institutional-holders"></p>
-                        </div>
-                    </div>
-                    
-                    <div class="column-3">
-                        Financials
-                        <div class="data-G" id="data-G">
-                            Revenue per Employee
-                            <p id="rev-per-employee"></p>
-                        </div>
-                        <div class="data-H" id="data-H">
-                            Profit Margin
-                            <p id="profit-margin"></p>
-                        </div>
-                        <div class="data-I" id="data-I">
+                        
+                        <div class="column-3">
+                            Financials
+                            <div class="data-G" id="data-G">
+                                Revenue per Employee
+                                <p id="rev-per-employee"></p>
+                            </div>
+                            <div class="data-H" id="data-H">
+                                Profit Margin
+                                <p id="profit-margin"></p>
+                            </div>
+                            <div class="data-I" id="data-I">
 
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -122,11 +125,24 @@
                 //check if the input is not blank
                 //pass the input into the first API call to get the stock quote data
                 console.log("testing out the IEX call from this file");
-                fetch(`https://cloud.iexapis.com/stable/time-series/PREMIUM_KAVOUT_KSCORE/${symbol}?token=${token}`)
-                .then((response) => response.json())
-                .then(data => {
-                    console.log(data)
-                });
+                fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${token}`)
+                    .then((response) => response.json())
+                    .then(data => {
+                        document.getElementById("current-price-output").innerHTML=`$${data.iexClose}`;
+                    });
+
+                //Advanced Stats -- 
+                fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/advanced-stats?token=${token}`)
+                    .then((response) => response.json())
+                    .then(data => {
+                        debugger
+                        document.getElementById("ev-to-rev").innerHTML=`${data.enterpriseValueToRevenue}x`;
+                        document.getElementById("price-to-sales").innerHTML=`${parseFloat(data.priceToSales.toFixed(2))}x`;
+                        document.getElementById("peg-ratio").innerHTML=`${parseFloat(data.pegRatio).toFixed(2)}x`;
+                        document.getElementById("beta").innerHTML=`${parseFloat(data.beta).toFixed(2)}`;
+                        document.getElementById("profit-margin").innerHTML=data.profitMargin;
+                        document.getElementById("rev-per-employee").innerHTML=`$${data.revenuePerEmployee}`;
+                    });
             }
         })
     
