@@ -11,11 +11,13 @@
      width: 100%;
      height: 100%;
      background: #FFF8F0;
-     /* font-family: 'Life Savers', cursive; */
+    font-family: 'Bebas Neue',
+    cursive;
      display: flex;
      flex-direction: column;
      justify-content: center;
      align-items: center;
+     color: #CC313D;
 }
 
 .app-container{
@@ -23,8 +25,14 @@
     flex-direction: column;
     border: 3px solid black;
     border-radius: 12px;
+    border-style: ridge;
     padding: 25px;
-    background-color: #F4D06F;
+    background-color: #F7C5CC;
+
+    /* box shadows */
+    -moz-box-shadow: inset 0 2 10px white;
+    -webkit-box-shadow: inset 0 0 10px white;
+    box-shadow: inset 0 0 10px white;
 }
 
 /* Section One */
@@ -33,6 +41,10 @@
     border-bottom: black solid 3px;
     align-items: center;
     justify-content: center;
+}
+
+.company-basic-info > div {
+    font-size: xx-large;
 }
 /* TICKER INPUT FIELD  */
 .ticker-container{
@@ -48,7 +60,7 @@
     flex-direction: column;
     align-items: center;
     padding: 2px;
-    background: #9DD9D2;
+    background: yellow;
     border-radius: 10px;
     border-style: none;
     text-align: center;
@@ -64,16 +76,17 @@
     align-items: center;
 }
 
-.current-price-output{
+p {
     width: 153px;
     height: 21px;
     text-align: center;
-    font-size: large;
+    font-size:x-large;
     font-weight: 700;
     padding: 2px;
-    background: #9DD9D2;
+    background: #761137;
     border-radius: 10px;
-    color: #4D3F78;
+    color: white;
+    margin: 5px;
 }
 /* Section Two */
 /* SOCIAL SENTIMENT  */
@@ -83,6 +96,7 @@
     justify-content: center;
     padding: 15px;
     border-bottom: black solid 3px;
+    font-size: xx-large;
 }
 /* CHART  */
 /* Section Three */
@@ -90,28 +104,33 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
     padding: 5px;
+    height: 100%;
 }
 /* ANALYST RECOMMENDATION BREAKDOWN  */
 .analyst-recommendations{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px;
-    flex-direction: column;
+     padding: 5px;
+     font-size: xx-large;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     width: 100%;
+     flex-direction: column;
+     border-bottom: black solid 3px;
+     text-align: center;
+     height: inherit;
 }
 
 .ratings-container{
     display: flex;
     padding: 10px;
+    font-size:x-large;
 }
 
 .ratings-container > div {
     padding: 5px;
-    width: 100%;
     justify-content: center;
-    border-bottom: black solid 3px;
+    border-bottom: black solid 2px;
 }
 
 .hold-rating{
@@ -122,6 +141,21 @@
 /* PRICE TARGET BREAKDOWN  */
 .price-targets{
     padding: 5px;
+    border-bottom: black solid 3px;
+    font-size: xx-large;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+    height: inherit;
+}
+
+.price-targets > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 /* FINANCIAL DATA  */
 .meaningful-financial-data{
@@ -130,6 +164,7 @@
     justify-content: center;
     padding: 5px;
     flex-direction: column;
+    font-size: xx-large;
 }
 
 .financial-data-container{
@@ -140,12 +175,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size:x-large;
 }
 
-.financial-data-container > div > div {
+.financial-data-container>div>div {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 5px;
+    font-size: large;
 }
 /* A,B,C  */
 .column-1{
@@ -161,7 +199,6 @@
 .column-3{
     padding: 5px;
 }
-
 
 /* Section Five */
 /* NEXT EARNINGS DATE */

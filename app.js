@@ -1,39 +1,37 @@
-var requirejs = require('requirejs');
-requirejs.config({
-    //Pass the top-level main.js/index.js require
-    //function to requirejs so that node modules
-    //are loaded relative to the top-level JS file.
-    nodeRequire: require
-});
-const express = require('express');
-const app = express();
 const fetch = require('node-fetch');
 global.fetch = require("node-fetch");
 const token = process.env.IEX; 
 
-app.use(express.static('public'))
-
 document.addEventListener('keypress', e => {
     if(e.key === 'Enter'){
         const symbol = document.getElementById("ticker-input").value;
-        //check if the symbol is not blank
-        console.log("testing out the IEX call from this file");
+        //check if the input is not blank
+        //pass the input into the first API call to get the stock quote data
         fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${token}`)
             .then((response) => response.json())
             .then(data => {
-                document.getElementById("current-price-output").innerHTML=data.iexClose;
+                document.getElementById("current-price-output").innerHTML=`$${data.iexClose}`;
             });
 
         //Advanced Stats -- 
         fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/advanced-stats?token=${token}`)
             .then((response) => response.json())
             .then(data => {
-                document.getElementById("ev-to-rev").innerHTML=data.enterpriseValueToRevenue;
-                document.getElementById("price-to-sales").innerHTML=data.priceToSales;
-                document.getElementById("peg-ratio").innerHTML=data.pegRatio;
-                document.getElementById("beta").innerHTML=data.beta;
-                document.getElementById("profit-margin").innerHTML=data.profitMargin;
-                document.getElementById("rev-per-employee").innerHTML=data.revenuePerEmployee;
+                // debugger
+                document.getElementById("ev-to-rev").innerHTML=`${data.enterpriseValueToRevenue}x`;
+                document.getElementById("price-to-sales").innerHTML=`${parseFloat(data.priceToSales.toFixed(2))}x`;
+                document.getElementById("peg-ratio").innerHTML=`${parseFloat(data.pegRatio).toFixed(2)}x`;
+                document.getElementById("beta").innerHTML=`${parseFloat(data.beta).toFixed(2)}`;
+                document.getElementById("profit-margin").innerHTML=`${(data.profitMargin * 100).toFixed(3)}%`;
+                document.getElementById("d-to-e").innerHTML=`${parseFloat(data.debtToEquity).toFixed(2)}`;
+                document.getElementById("rev-per-employee").innerHTML=`$${data.revenuePerEmployee}`;
+            });
+
+        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/stats?token=${token}`)
+            .then((response) => response.json())
+            .then(data => {
+                document.getElementById("avg-10day-vol").innerHTML=data.avg10Volume;
+                document.getElementById("avg-30day-vol").innerHTML=data.avg30Volume;
             });
     }
 })
@@ -60,6 +58,7 @@ document.addEventListener('keypress', e => {
 //     console.log(`listening on ${PORT}`)
 // })
 
+// app.use(express.static('public'))
 
 
 // Fetch example with header
@@ -72,14 +71,14 @@ document.addEventListener('keypress', e => {
 //   }
 // });
 
-// fetch(`https://socialsentiment.io/api/v1/stocks/${symbol}/sentiment/daily/`, 
-//                 {
-//                     method: 'GET',
-//                     headers: {
-//                         'accept': 'application/json',
-//                         'Authorization': 'Token ' + token,
-//                     }
-//                 })
-//                 .then(res => {
-//                     debugger
-//                 });
+fetch(`https://socialsentiment.io/api/v1/stocks/${symbol}/sentiment/daily/`, 
+                {
+                    method: 'GET',
+                    headers: {
+                            `Authorization: Token + ${token}`,
+                            'Accept': 'application/json',
+                    }
+                })
+                .then(res => {
+                    debugger
+                });

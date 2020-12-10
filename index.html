@@ -6,9 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="./src/styles/global.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Life+Savers:wght@700&family=Playfair+Display&family=Yeon+Sung&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <title>My Finance Intern</title>
-    <!-- <script data-main="./app.js" src="require.js"></script> -->
 </head>
 
 <body>
@@ -23,6 +22,7 @@
                 <div class="current-price-container">
                     CURRENT PRICE
                     <p id="current-price-output" class="current-price-output"></p>
+                    
                 </div>
             </div>
 
@@ -32,7 +32,7 @@
 
             <div class="wall-street-sentiment-container">
                 <div class="analyst-recommendations">
-                    ANALYST RECOMMENDATION BREAKDOWN
+                    ANALYST RECOMMENDATIONS
                     <div class="ratings-container">
                         <div class="buy-rating" id="buy-rating">
                             BUY
@@ -47,69 +47,75 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="price-targets">
                     PRICE TARGET BREAKDOWN
                     <div class="avg-pt" id="avg-pt">
-
+                        Average PT
+                        <p class="avg-pt"></p>
                     </div>
                     
                     <div class="median-pt" id="median-pt">
-
+                        Median PT
+                        <p class="avg-pt"></p>
                     </div>
                 </div>
-                <div class="meaningful-financial-data">
-                    FINANCIAL DATA
-                    <div class="financial-data-container">
-                        <div class="column-1">
-                            Valuation Multiples
-                            <div class="data-A" >
-                                Enterprise Value to Revenue
-                                <p id="ev-to-rev"></p>
-                            </div>
-                            <div class="data-B" id="data-B">
-                                Price to Sales
-                                <p id="price-to-sales"></p>
-                            </div>
-                            <div class="data-C" id="data-C">
-                                PEG Ratio
-                                <p id="peg-ratio"></p>
-                            </div>
-                        </div>
-                        
-                        <div class="column-2">
-                            Relevant Trading Data 
-                            <div class="data-D" id="data-D">
-                                Beta
-                                <p id="beta"></p>
-                            </div>
-                            <div class="data-E" id="data-E">
-                                TBD
-                            </div>
-                            <div class="data-F" id="data-F">
-                                TBD
-                                <p id="institutional-holders"></p>
-                            </div>
-                        </div>
-                        
-                        <div class="column-3">
-                            Financials
-                            <div class="data-G" id="data-G">
-                                Revenue per Employee
-                                <p id="rev-per-employee"></p>
-                            </div>
-                            <div class="data-H" id="data-H">
-                                Profit Margin
-                                <p id="profit-margin"></p>
-                            </div>
-                            <div class="data-I" id="data-I">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="earnings-data">
+                <!-- <div class="earnings-data">
                     NEXT EARNINGS DATE:
                     <p id="next-earnings"></p>
+                </div> -->
+            </div>
+            
+            <div class="meaningful-financial-data">
+                FINANCIAL DATA
+                <div class="financial-data-container">
+                    <div class="column-1">
+                        <h3 class="column-title">Valuation Multiples</h3>
+                        <div class="data-A" >
+                            Enterprise Value to Revenue
+                            <p id="ev-to-rev"></p>
+                        </div>
+                        <div class="data-B" id="data-B">
+                            Price to Sales
+                            <p id="price-to-sales"></p>
+                        </div>
+                        <div class="data-C" id="data-C">
+                            PEG Ratio
+                            <p id="peg-ratio"></p>
+                        </div>
+                    </div>
+                    
+                    <div class="column-2">
+                        <h3 class="column-title">Relevant Trading Data</h3>
+                        <div class="data-D" id="data-D">
+                            Beta
+                            <p id="beta"></p>
+                        </div>
+                        <div class="data-E" id="data-E">
+                            Avg. 10 Day Trading Volume
+                            <p id="avg-10day-vol"></p>
+                        </div>
+                        <div class="data-F" id="data-F">
+                            Avg. 30 Day Trading Volume
+                            <p id="avg-30day-vol"></p>
+                        </div>
+                    </div>
+                    
+                    <div class="column-3">
+                        <h3 class="column-title">Financials</h3>
+                        <div class="data-G" id="data-G">
+                            Revenue per Employee
+                            <p id="rev-per-employee"></p>
+                        </div>
+                        <div class="data-H" id="data-H">
+                            Profit Margin
+                            <p id="profit-margin"></p>
+                        </div>
+                        <div class="data-I" id="data-I">
+                            Debt to Equity
+                            <p id="d-to-e"></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -117,36 +123,22 @@
     <!-- <script src="./app.js"></script> -->
     <script>
 
-        // const symbol = "AAPL";
-
         document.addEventListener('keypress', e => {
-            if(e.key === 'Enter'){
-                const symbol = document.getElementById("ticker-input").value;
-                //check if the input is not blank
-                //pass the input into the first API call to get the stock quote data
-                console.log("testing out the IEX call from this file");
-                fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${token}`)
-                    .then((response) => response.json())
-                    .then(data => {
-                        document.getElementById("current-price-output").innerHTML=`$${data.iexClose}`;
-                    });
-
-                //Advanced Stats -- 
-                fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/advanced-stats?token=${token}`)
-                    .then((response) => response.json())
-                    .then(data => {
-                        debugger
-                        document.getElementById("ev-to-rev").innerHTML=`${data.enterpriseValueToRevenue}x`;
-                        document.getElementById("price-to-sales").innerHTML=`${parseFloat(data.priceToSales.toFixed(2))}x`;
-                        document.getElementById("peg-ratio").innerHTML=`${parseFloat(data.pegRatio).toFixed(2)}x`;
-                        document.getElementById("beta").innerHTML=`${parseFloat(data.beta).toFixed(2)}`;
-                        document.getElementById("profit-margin").innerHTML=data.profitMargin;
-                        document.getElementById("rev-per-employee").innerHTML=`$${data.revenuePerEmployee}`;
-                    });
-            }
+            fetch(`https://socialsentiment.io/api/v1/stocks/${symbol}/sentiment/daily/`, 
+                {
+                    method: 'GET',
+                    headers: {
+                            'Authorization': 'Token ' + token`,
+                            'Accept': 'application/json',
+                    }
+                })
+                .then(res => {
+                    debugger
+                });
         })
     
-        // fetch('https://socialsentiment.io/api/v1/stocks/TSLA/sentiment/daily/')
+        // fetch('https://socialsentiment.io/api/v1/stocks/TSLA/')
+
     </script>
 </body>
 </html>
