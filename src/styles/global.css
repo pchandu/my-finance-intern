@@ -92,6 +92,9 @@ p {
     margin: 5px;
 }
 /* Section Two */
+.charts{
+    display: flex;
+}
 /* SOCIAL SENTIMENT  */
 .social-sentiment-container{
     display: flex;
