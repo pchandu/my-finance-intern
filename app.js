@@ -1,20 +1,20 @@
 const fetch = require('node-fetch');
 global.fetch = require("node-fetch");
-const token = process.env.IEX; 
+const IEXtoken = process.env.IEX; 
+const SStoken = process.env.SENTI
 
 document.addEventListener('keypress', e => {
     if(e.key === 'Enter'){
         const symbol = document.getElementById("ticker-input").value;
         //check if the input is not blank
         //pass the input into the first API call to get the stock quote data
-        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${token}`)
+        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${IEXtoken}`)
             .then((response) => response.json())
             .then(data => {
                 document.getElementById("current-price-output").innerHTML=`$${data.iexClose}`;
             });
-
         //Advanced Stats -- 
-        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/advanced-stats?token=${token}`)
+        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/advanced-stats?token=${IEXtoken}`)
             .then((response) => response.json())
             .then(data => {
                 // debugger
@@ -26,16 +26,36 @@ document.addEventListener('keypress', e => {
                 document.getElementById("d-to-e").innerHTML=`${parseFloat(data.debtToEquity).toFixed(2)}`;
                 document.getElementById("rev-per-employee").innerHTML=`$${data.revenuePerEmployee}`;
             });
-
-        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/stats?token=${token}`)
+        //Key Stats -- 
+        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/stats?token=${IEXtoken}`)
             .then((response) => response.json())
             .then(data => {
                 document.getElementById("avg-10day-vol").innerHTML=data.avg10Volume;
                 document.getElementById("avg-30day-vol").innerHTML=data.avg30Volume;
             });
+
+        
     }
 })
 
+function socialSentimentData(symbol) {
+    const stock = symbol.toUpperCase();
+    var url = `https://cors-anywhere.herokuapp.com/https://socialsentiment.io/api/v1/stocks/${stock}/sentiment/daily/`;
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url);
+
+    xhr.setRequestHeader("accept", "application/json");
+    xhr.setRequestHeader("Authorization", `Token ${SStoken}`);
+
+    xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+        
+        console.log(xhr.responseText);
+    }};
+
+    xhr.send();
+}
 
 
 // Kavout Score
@@ -71,14 +91,14 @@ document.addEventListener('keypress', e => {
 //   }
 // });
 
-fetch(`https://socialsentiment.io/api/v1/stocks/${symbol}/sentiment/daily/`, 
-                {
-                    method: 'GET',
-                    headers: {
-                            `Authorization: Token + ${token}`,
-                            'Accept': 'application/json',
-                    }
-                })
-                .then(res => {
-                    debugger
-                });
+// fetch(`https://socialsentiment.io/api/v1/stocks/${symbol}/sentiment/daily/`, 
+//                 {
+//                     method: 'GET',
+//                     headers: {
+//                             `Authorization: Token + ${token}`,
+//                             'Accept': 'application/json',
+//                     }
+//                 })
+//                 .then(res => {
+//                     debugger
+//                 });

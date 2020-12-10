@@ -122,22 +122,12 @@
     </div>
     <!-- <script src="./app.js"></script> -->
     <script>
-
+        
         document.addEventListener('keypress', e => {
-            fetch(`https://socialsentiment.io/api/v1/stocks/${symbol}/sentiment/daily/`, 
-                {
-                    method: 'GET',
-                    headers: {
-                            'Authorization': 'Token ' + token`,
-                            'Accept': 'application/json',
-                    }
-                })
-                .then(res => {
-                    debugger
-                });
+            if(e.key === 'Enter'){
+                socialSentimentData(document.getElementById("ticker-input").value)
+            }
         })
-    
-        // fetch('https://socialsentiment.io/api/v1/stocks/TSLA/')
 
     </script>
 </body>
