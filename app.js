@@ -34,37 +34,134 @@ document.addEventListener('keypress', e => {
                 document.getElementById("avg-30day-vol").innerHTML=data.avg30Volume;
             });
 
-        
+        //Social Sentiment Data
+        //grabbing industry id
+                fetch(`https://cors-anywhere.herokuapp.com/https://socialsentiment.io/api/v1/stocks/${symbol.toUpperCase()}/`, 
+                {
+                    headers: {
+                        Accept: "application/json",
+                        Authorization: `Token ${SStoken}`
+                    }
+                })
+                .then(res => res.json())
+                .then(data => {
+                    //grabbing industry sentiment data
+                    fetch(`https://cors-anywhere.herokuapp.com/https://socialsentiment.io/api/v1/industries/${data.industry_id}/sentiment/daily/`, 
+                    {
+                        headers: {
+                            Accept: "application/json",
+                            Authorization: "Token 3b6245845e1b07c7b6eb3fe4e3285837114951e4"
+                        }
+                    })
+                    .then(res => res.json())
+                    .then(industryData => {
+                        //grabbing sentiment data and making chart
+                        fetch(`https://cors-anywhere.herokuapp.com/https://socialsentiment.io/api/v1/stocks/${symbol.toUpperCase()}/sentiment/daily/`, 
+                        {
+                            headers: {
+                                Accept: "application/json",
+                                Authorization: "Token 3b6245845e1b07c7b6eb3fe4e3285837114951e4"
+                            }
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            var ctx = document.getElementById('myChart').getContext('2d');
+                            var chart = new Chart(ctx, {
+                                // The type of chart we want to create
+                                type: 'line',
+                                // The data for our dataset
+                                data: {
+                                    labels: [
+                                        `${data[0].date}`, `${data[1].date}`, `${data[2].date}`, 
+                                        `${data[3].date}`, `${data[4].date}`, `${data[5].date}`, 
+                                        `${data[6].date}`, `${data[7].date}`],
+                                    datasets: [
+                                        {
+                                            label: 'Social Sentiment Activity',
+                                            backgroundColor: 'rgba(0,0,0,0)',
+                                            borderColor: 'rgb(106,45,92)',
+                                            yAxisID: 'A',
+                                            data: [`${data[0].activity}`, `${data[1].activity}`, `${data[2].activity}`, 
+                                            `${data[3].activity}`, `${data[4].activity}`, `${data[5].activity}`, 
+                                            `${data[6].activity}`, `${data[7].activity}`]
+                                        },
+                                        {
+                                            label: 'Social Sentiment Score',
+                                            backgroundColor: 'rgba(0,0,0,0)',
+                                            borderColor: 'rgb(255,84,118)',
+                                            yAxisID: 'B',
+                                            data: [`${data[0].score}`, `${data[1].score}`, `${data[2].score}`, 
+                                            `${data[3].score}`, `${data[4].score}`, `${data[5].score}`, 
+                                            `${data[6].score}`, `${data[7].score}`]
+                                        },
+                                        {
+                                            label: 'Industry Sentiment Activity',
+                                            backgroundColor: 'rgba(0,0,0,0)',
+                                            borderColor: 'rgb(29,58,20)',
+                                            yAxisID: 'A',
+                                            data: [`${industryData[0].activity}`, `${industryData[1].activity}`, `${industryData[2].activity}`, 
+                                            `${industryData[3].activity}`, `${industryData[4].activity}`, `${industryData[5].activity}`, 
+                                            `${industryData[6].activity}`, `${industryData[7].activity}`]
+                                        },
+                                        {
+                                            label: 'Industry Sentiment Score',
+                                            backgroundColor: 'rgba(0,0,0,0)',
+                                            borderColor: 'rgb(130,212,187)',
+                                            yAxisID: 'B',
+                                            data: [`${industryData[0].score}`, `${industryData[1].score}`, `${industryData[2].score}`, 
+                                            `${industryData[3].score}`, `${industryData[4].score}`, `${industryData[5].score}`, 
+                                            `${industryData[6].score}`, `${industryData[7].score}`]
+                                        },
+                                    ]
+                                },
+
+                                // Configuration options go here
+                                options: {
+                                    scales: {
+                                        xAxes: [{
+                                            gridLines: {
+                                                display:false
+                                            }
+                                        }],
+                                        yAxes: [
+                                            {
+                                                id: 'A',
+                                                type: 'linear',
+                                                position: 'left',
+                                                scaleLabel:{
+                                                    display: true,
+                                                    labelString: 'Activity'
+                                                },
+                                                gridLines: {
+                                                    display:false
+                                                }
+                                            }, 
+                                            {
+                                                id: 'B',
+                                                type: 'linear',
+                                                position: 'right',
+                                                scaleLabel:{
+                                                    display: true,
+                                                    labelString: 'Score'
+                                                },
+                                                gridLines: {
+                                                    display:false
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            });
+                        })
+                    })
+                })
+                //end of fetch
+
+
     }
 })
 
-function socialSentimentData(symbol) {
-    const stock = symbol.toUpperCase();
-    var url = `https://cors-anywhere.herokuapp.com/https://socialsentiment.io/api/v1/stocks/${stock}/sentiment/daily/`;
 
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", url);
-
-    xhr.setRequestHeader("accept", "application/json");
-    xhr.setRequestHeader("Authorization", `Token ${SStoken}`);
-
-    xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4) {
-        
-        console.log(xhr.responseText);
-    }};
-
-    xhr.send();
-}
-
-
-// Kavout Score
-// fetch(`https://cloud.iexapis.com/stable/time-series/PREMIUM_KAVOUT_KSCORE/${symbol}?token=${token}`)
-//                 .then((response) => response.json())
-//                 .then(data => {
-//                     console.log(data)
-//                 });
-//DOM event listener -- 
 
 // const path = require('path')
 // const PORT = process.env.PORT || 8000; 
@@ -79,26 +176,3 @@ function socialSentimentData(symbol) {
 // })
 
 // app.use(express.static('public'))
-
-
-// Fetch example with header
-// fetch('www.example.net', {
-//   method: 'POST',
-//   headers: {
-//     'Content-Type': 'text/plain',
-//     'X-My-Custom-Header': 'value-v',
-//     'Authorization': 'Bearer ' + token,
-//   }
-// });
-
-// fetch(`https://socialsentiment.io/api/v1/stocks/${symbol}/sentiment/daily/`, 
-//                 {
-//                     method: 'GET',
-//                     headers: {
-//                             `Authorization: Token + ${token}`,
-//                             'Accept': 'application/json',
-//                     }
-//                 })
-//                 .then(res => {
-//                     debugger
-//                 });

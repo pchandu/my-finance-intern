@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./src/styles/global.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <title>My Finance Intern</title>
 </head>
 
@@ -28,6 +29,7 @@
 
             <div class="social-sentiment-container" >
                 SOCIAL SENTIMENT CHART
+                <canvas id="myChart" width="550" height="200"></canvas>
             </div>
 
             <div class="wall-street-sentiment-container">
@@ -45,6 +47,10 @@
                         <div class="sell-rating" id="sell-rating">
                             SELL
                         </div>
+                    </div>
+                    <div class="total-ratings">
+                        TOTAL # OF ANALYST RATINGS: 
+                        <h1 id='#analysts'></h1>
                     </div>
                 </div>
 
@@ -120,15 +126,166 @@
             </div>
         </div>
     </div>
+    
     <!-- <script src="./app.js"></script> -->
     <script>
-        
         document.addEventListener('keypress', e => {
-            if(e.key === 'Enter'){
-                socialSentimentData(document.getElementById("ticker-input").value)
-            }
-        })
+    if(e.key === 'Enter'){
+        const symbol = document.getElementById("ticker-input").value;
+        //check if the input is not blank
+        //pass the input into the first API call to get the stock quote data
+        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${IEXtoken}`)
+            .then((response) => response.json())
+            .then(data => {
+                document.getElementById("current-price-output").innerHTML=`$${data.iexClose}`;
+            });
+        //Advanced Stats -- 
+        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/advanced-stats?token=${IEXtoken}`)
+            .then((response) => response.json())
+            .then(data => {
+                // debugger
+                document.getElementById("ev-to-rev").innerHTML=`${data.enterpriseValueToRevenue}x`;
+                document.getElementById("price-to-sales").innerHTML=`${parseFloat(data.priceToSales.toFixed(2))}x`;
+                document.getElementById("peg-ratio").innerHTML=`${parseFloat(data.pegRatio).toFixed(2)}x`;
+                document.getElementById("beta").innerHTML=`${parseFloat(data.beta).toFixed(2)}`;
+                document.getElementById("profit-margin").innerHTML=`${(data.profitMargin * 100).toFixed(3)}%`;
+                document.getElementById("d-to-e").innerHTML=`${parseFloat(data.debtToEquity).toFixed(2)}`;
+                document.getElementById("rev-per-employee").innerHTML=`$${data.revenuePerEmployee}`;
+            });
+        //Key Stats -- 
+        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/stats?token=${IEXtoken}`)
+            .then((response) => response.json())
+            .then(data => {
+                document.getElementById("avg-10day-vol").innerHTML=data.avg10Volume;
+                document.getElementById("avg-30day-vol").innerHTML=data.avg30Volume;
+            });
 
+        //Social Sentiment Data
+        //grabbing industry id
+                fetch(`https://cors-anywhere.herokuapp.com/https://socialsentiment.io/api/v1/stocks/${symbol.toUpperCase()}/`, 
+                {
+                    headers: {
+                        Accept: "application/json",
+                        Authorization: `Token ${SStoken}`
+                    }
+                })
+                .then(res => res.json())
+                .then(data => {
+                    //grabbing industry sentiment data
+                    fetch(`https://cors-anywhere.herokuapp.com/https://socialsentiment.io/api/v1/industries/${data.industry_id}/sentiment/daily/`, 
+                    {
+                        headers: {
+                            Accept: "application/json",
+                            Authorization: "Token 3b6245845e1b07c7b6eb3fe4e3285837114951e4"
+                        }
+                    })
+                    .then(res => res.json())
+                    .then(industryData => {
+                        //grabbing sentiment data and making chart
+                        fetch(`https://cors-anywhere.herokuapp.com/https://socialsentiment.io/api/v1/stocks/${symbol.toUpperCase()}/sentiment/daily/`, 
+                        {
+                            headers: {
+                                Accept: "application/json",
+                                Authorization: "Token 3b6245845e1b07c7b6eb3fe4e3285837114951e4"
+                            }
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            var ctx = document.getElementById('myChart').getContext('2d');
+                            var chart = new Chart(ctx, {
+                                // The type of chart we want to create
+                                type: 'line',
+                                // The data for our dataset
+                                data: {
+                                    labels: [
+                                        `${data[0].date}`, `${data[1].date}`, `${data[2].date}`, 
+                                        `${data[3].date}`, `${data[4].date}`, `${data[5].date}`, 
+                                        `${data[6].date}`, `${data[7].date}`],
+                                    datasets: [
+                                        {
+                                            label: 'Social Sentiment Activity',
+                                            backgroundColor: 'rgba(0,0,0,0)',
+                                            borderColor: 'rgb(106,45,92)',
+                                            yAxisID: 'A',
+                                            data: [`${data[0].activity}`, `${data[1].activity}`, `${data[2].activity}`, 
+                                            `${data[3].activity}`, `${data[4].activity}`, `${data[5].activity}`, 
+                                            `${data[6].activity}`, `${data[7].activity}`]
+                                        },
+                                        {
+                                            label: 'Social Sentiment Score',
+                                            backgroundColor: 'rgba(0,0,0,0)',
+                                            borderColor: 'rgb(255,84,118)',
+                                            yAxisID: 'B',
+                                            data: [`${data[0].score}`, `${data[1].score}`, `${data[2].score}`, 
+                                            `${data[3].score}`, `${data[4].score}`, `${data[5].score}`, 
+                                            `${data[6].score}`, `${data[7].score}`]
+                                        },
+                                        {
+                                            label: 'Industry Sentiment Activity',
+                                            backgroundColor: 'rgba(0,0,0,0)',
+                                            borderColor: 'rgb(29,58,20)',
+                                            yAxisID: 'A',
+                                            data: [`${industryData[0].activity}`, `${industryData[1].activity}`, `${industryData[2].activity}`, 
+                                            `${industryData[3].activity}`, `${industryData[4].activity}`, `${industryData[5].activity}`, 
+                                            `${industryData[6].activity}`, `${industryData[7].activity}`]
+                                        },
+                                        {
+                                            label: 'Industry Sentiment Score',
+                                            backgroundColor: 'rgba(0,0,0,0)',
+                                            borderColor: 'rgb(130,212,187)',
+                                            yAxisID: 'B',
+                                            data: [`${industryData[0].score}`, `${industryData[1].score}`, `${industryData[2].score}`, 
+                                            `${industryData[3].score}`, `${industryData[4].score}`, `${industryData[5].score}`, 
+                                            `${industryData[6].score}`, `${industryData[7].score}`]
+                                        },
+                                    ]
+                                },
+
+                                // Configuration options go here
+                                options: {
+                                    scales: {
+                                        xAxes: [{
+                                            gridLines: {
+                                                display:false
+                                            }
+                                        }],
+                                        yAxes: [
+                                            {
+                                                id: 'A',
+                                                type: 'linear',
+                                                position: 'left',
+                                                scaleLabel:{
+                                                    display: true,
+                                                    labelString: 'Activity'
+                                                },
+                                                gridLines: {
+                                                    display:false
+                                                }
+                                            }, 
+                                            {
+                                                id: 'B',
+                                                type: 'linear',
+                                                position: 'right',
+                                                scaleLabel:{
+                                                    display: true,
+                                                    labelString: 'Score'
+                                                },
+                                                gridLines: {
+                                                    display:false
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            });
+                        })
+                    })
+                })
+                //end of fetch
+
+
+    }
+})
     </script>
 </body>
 </html>

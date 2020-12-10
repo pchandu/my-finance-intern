@@ -67,6 +67,9 @@
     height: 22px;
     width: 157px;
     color: #4D3F78;
+    font-family: 'Bebas Neue',
+    cursive;
+    font-size: large;
 }
 /* CURRENT PRICE OUTPUT  */
 .current-price-container{
@@ -92,6 +95,7 @@ p {
 /* SOCIAL SENTIMENT  */
 .social-sentiment-container{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 15px;
