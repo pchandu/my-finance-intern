@@ -7,7 +7,9 @@
     "node": "13.2.0",
     "npm": "6.13.4"
   },
-  "scripts": {},
+  "scripts": {
+    "dev": "webpack --mode development"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pchandu/-my-finance-intern.git"
@@ -43,6 +45,10 @@
     "axios": "^0.21.0",
     "express": "^4.17.1",
     "node-fetch": "^2.6.1",
-    "requirejs": "^2.3.6"
+    "requirejs": "^2.3.6",
+    "script-loader": "^0.7.2",
+    "webpack": "^5.10.0",
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.11.0"
   }
 }
