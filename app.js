@@ -6,33 +6,23 @@ const SStoken = process.env.SENTI
 document.addEventListener('keypress', e => {
     if(e.key === 'Enter'){
         const symbol = document.getElementById("ticker-input").value;
+        if(symbol.length === 0 || symbol.length > 4){
+            document.getElementById("company-name").innerHTML="INVALID TICKER";
+            document.getElementById("ev-to-rev").innerHTML="INVALID";
+            document.getElementById("price-to-sales").innerHTML="INVALID";
+            document.getElementById("peg-ratio").innerHTML="INVALID";
+            document.getElementById("beta").innerHTML="INVALID";
+            document.getElementById("profit-margin").innerHTML="INVALID";
+            document.getElementById("d-to-e").innerHTML="INVALID";
+            document.getElementById("rev-per-employee").innerHTML="INVALID";
+            document.getElementById("avg-10day-vol").innerHTML="INVALID";
+            document.getElementById("avg-30day-vol").innerHTML="INVALID";
+            document.getElementById("high-pt").innerHTML="INVALID";
+            document.getElementById("avg-pt").innerHTML="INVALID";
+            document.getElementById("low-pt").innerHTML="INVALID";
+        } else {
         //check if the input is not blank
         //pass the input into the first API call to get the stock quote data
-        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${IEXtoken}`)
-            .then((response) => response.json())
-            .then(data => {
-                document.getElementById("current-price-output").innerHTML=`$${data.iexClose}`;
-            });
-        //Advanced Stats -- 
-        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/advanced-stats?token=${IEXtoken}`)
-            .then((response) => response.json())
-            .then(data => {
-                // debugger
-                document.getElementById("ev-to-rev").innerHTML=`${data.enterpriseValueToRevenue}x`;
-                document.getElementById("price-to-sales").innerHTML=`${parseFloat(data.priceToSales.toFixed(2))}x`;
-                document.getElementById("peg-ratio").innerHTML=`${parseFloat(data.pegRatio).toFixed(2)}x`;
-                document.getElementById("beta").innerHTML=`${parseFloat(data.beta).toFixed(2)}`;
-                document.getElementById("profit-margin").innerHTML=`${(data.profitMargin * 100).toFixed(3)}%`;
-                document.getElementById("d-to-e").innerHTML=`${parseFloat(data.debtToEquity).toFixed(2)}`;
-                document.getElementById("rev-per-employee").innerHTML=`$${data.revenuePerEmployee}`;
-            });
-        //Key Stats -- 
-        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/stats?token=${IEXtoken}`)
-            .then((response) => response.json())
-            .then(data => {
-                document.getElementById("avg-10day-vol").innerHTML=data.avg10Volume;
-                document.getElementById("avg-30day-vol").innerHTML=data.avg30Volume;
-            });
 
         //Social Sentiment Data
         //grabbing industry id
@@ -155,9 +145,56 @@ document.addEventListener('keypress', e => {
                         })
                     })
                 })
-                //end of fetch
+                //end of sentiment data fetching and charting
 
+        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${IEXtoken}`)
+            .then((response) => response.json())
+            .then(data => {
+                document.getElementById("current-price-output").innerHTML=`$${data.iexClose}`;
+            });
+        //Advanced Stats -- 
+        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/advanced-stats?token=${IEXtoken}`)
+            .then((response) => response.json())
+            .then(data => {
+                // debugger
+                document.getElementById("ev-to-rev").innerHTML=`${data.enterpriseValueToRevenue}x`;
+                document.getElementById("price-to-sales").innerHTML=`${parseFloat(data.priceToSales.toFixed(2))}x`;
+                document.getElementById("peg-ratio").innerHTML=`${parseFloat(data.pegRatio).toFixed(2)}x`;
+                document.getElementById("beta").innerHTML=`${parseFloat(data.beta).toFixed(2)}`;
+                document.getElementById("profit-margin").innerHTML=`${(data.profitMargin * 100).toFixed(3)}%`;
+                document.getElementById("d-to-e").innerHTML=`${parseFloat(data.debtToEquity).toFixed(2)}`;
+                document.getElementById("rev-per-employee").innerHTML=`$${data.revenuePerEmployee}`;
+            });
+        //Key Stats -- 
+        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/stats?token=${IEXtoken}`)
+            .then((response) => response.json())
+            .then(data => {
+                document.getElementById("avg-10day-vol").innerHTML=data.avg10Volume;
+                document.getElementById("avg-30day-vol").innerHTML=data.avg30Volume;
+                document.getElementById("company-name").innerHTML=data.companyName;
+            });
 
+        //Analyst Recommendations -- 
+        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/recommendation-trends?token=${IEXtoken}`)
+            .then((response) => response.json())
+            .then(data => {
+                document.getElementById("buy-rating-body").innerHTML=data[data.length-1].ratingBuy + data[data.length-1].ratingOverweight;
+                document.getElementById("hold-rating-body").innerHTML=data[data.length-1].ratingHold;
+                document.getElementById("sell-rating-body").innerHTML=data[data.length-1].ratingSell + data[data.length-1].ratingUnderweight;
+                document.getElementById("#analysts").innerHTML=
+                    data[data.length-1].ratingSell + data[data.length-1].ratingUnderweight + data[data.length-1].ratingBuy + data[data.length-1].ratingOverweight
+                    + data[data.length-1].ratingHold;
+            });
+
+        //Price Targets
+        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/price-target?token=${IEXtoken}`)
+            .then((response) => response.json())
+            .then(data => {
+                document.getElementById("high-pt").innerHTML=`$${data.priceTargetHigh.toFixed(0)}`;
+                document.getElementById("avg-pt").innerHTML=`$${data.priceTargetAverage.toFixed(0)}`;
+                document.getElementById("low-pt").innerHTML=`$${data.priceTargetLow.toFixed(0)}`;
+            });
+    }
     }
 })
 

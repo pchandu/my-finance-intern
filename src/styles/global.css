@@ -10,14 +10,16 @@
 
      width: 100%;
      height: 100%;
-     background: #FFF8F0;
+     /* background: #FFF8F0; */
+     background-color: #FFFAF1;
     font-family: 'Bebas Neue',
     cursive;
      display: flex;
      flex-direction: column;
      justify-content: center;
      align-items: center;
-     color: #CC313D;
+     /* color: #CC313D; */
+    color: #29293a;
 }
 
 .app-container{
@@ -27,7 +29,8 @@
     border-radius: 12px;
     border-style: ridge;
     padding: 5px;
-    background-color: #F7C5CC;
+    /* background-color: #F7C5CC; */
+    background-color: white;
 
     /* box shadows */
     -moz-box-shadow: inset 0 2 10px white;
@@ -56,20 +59,17 @@
 }
 
 .ticker-input{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2px;
-    background: yellow;
-    border-radius: 10px;
-    border-style: none;
+    width: 153px;
+    height: 21px;
     text-align: center;
-    height: 22px;
-    width: 157px;
-    color: #4D3F78;
-    font-family: 'Bebas Neue',
-    cursive;
-    font-size: large;
+    padding: 2px;
+    border-radius: 10px;
+    /* color: white; */
+    color: #29293a;
+    font-family: 'Karma',
+    serif;
+    border-style: none;
+    background-color: #FFFAF1;
 }
 /* CURRENT PRICE OUTPUT  */
 .current-price-container{
@@ -86,10 +86,34 @@ p {
     font-size:x-large;
     font-weight: 700;
     padding: 2px;
-    background: #761137;
+    background: #4e3b42;
     border-radius: 10px;
     color: white;
     margin: 5px;
+    font-family: 'Roboto Condensed',
+    sans-serif;
+}
+
+h3 {
+    font-family: 'Roboto Condensed',
+    sans-serif;
+    
+}
+h2 {
+    font-family: 'Lato',
+    sans-serif;
+}
+h4{
+    color: #2B4E6B;
+    font-family: 'Roboto Condensed',
+    sans-serif;
+    font-size: small;
+}
+
+div {
+    font-family: 'Bebas Neue',
+    cursive;
+    
 }
 /* Section Two */
 .charts{
@@ -142,7 +166,7 @@ p {
     align-items: center;
 }
 .buy-rating{
-    color: green;
+    color: #21CE99;
     /* color: white; */
     border-radius: 8px;
 }
@@ -150,14 +174,14 @@ p {
 .hold-rating{
     /* border-left: black solid 2px;
     border-right: black solid 2px; */
-    color: gray;
+    color: #7B8E95;
     border-radius: 8px;
     margin-left: 5px;
     margin-right: 5px;
 }
 
 .sell-rating{
-    color: red;
+    color: #9A0002;
     /* color: white; */
     border-radius: 8px;
 }
@@ -185,7 +209,12 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: x-large;
+    font-size: large;
+}
+
+.price-targets > div > h2 {
+    font-family: 'Roboto Condensed',
+    sans-serif;
 }
 /* FINANCIAL DATA  */
 .meaningful-financial-data{
@@ -199,13 +228,14 @@ p {
 
 .financial-data-container{
     display: flex;
+    margin: 5px;
 }
 
 .financial-data-container > div {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size:x-large;
+    font-size:large;
 }
 
 .financial-data-container>div>div {
@@ -215,20 +245,24 @@ p {
     margin: 5px;
     font-size: large;
 }
-/* A,B,C  */
-.column-1{
-    padding: 5px;
+
+.column-title{
+    margin: 5px;
 }
+/* A,B,C  */
+/* .column-1{
+    padding: 5px;
+} */
 
 /* D,E,F  */
-.column-2{
+/* .column-2{
     padding: 5px;
-}
+} */
 
 /* G,H,I  */
-.column-3{
+/* .column-3{
     padding: 5px;
-}
+} */
 
 /* Section Five */
 /* NEXT EARNINGS DATE */

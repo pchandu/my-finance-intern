@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="./src/styles/global.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Averia+Sans+Libre:wght@300&family=Josefin+Sans&family=Karma:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato&family=Roboto+Condensed&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <title>My Finance Intern</title>
 </head>
@@ -23,7 +24,10 @@
                 <div class="current-price-container">
                     CURRENT PRICE
                     <p id="current-price-output" class="current-price-output"></p>
-                    
+                </div>
+
+                <div class="company-name" id="company-name">
+
                 </div>
             </div>
             
@@ -37,40 +41,40 @@
                     ANALYST RECOMMENDATIONS
                     <div class="ratings-container">
                         <div class="buy-rating" id="buy-rating">
-                            BUY
-                            <h2 id="buy-rating-body"></h2>
+                            <h2>BUY</h2>
+                            <h3 id="buy-rating-body"></h3>
                         </div>
                         
                         <div class="hold-rating" id="hold-rating">
-                            HOLD
-                            <h2 id="hold-rating-body"></h2>
+                            <h2>HOLD</h2>
+                            <h3 id="hold-rating-body"></h3>
                         </div>
                         
                         <div class="sell-rating" id="sell-rating">
-                            SELL
-                            <h2 id="sell-rating-body"></h2>
+                            <h2>SELL</h2>
+                            <h3 id="sell-rating-body"></h3>
                         </div>
                     </div>
                     <div class="total-ratings">
-                        TOTAL # OF ANALYST RATINGS: 
-                        <h1 id='#analysts'></h1>
+                        <h2>TOTAL # OF ANALYST RATINGS: </h2>
+                        <h3 id='#analysts'></h1>
                     </div>
                 </div>
 
                 <div class="price-targets">
                     PRICE TARGET BREAKDOWN
                     <div class="high-pt" >
-                        High PT
+                        <h2>High PT</h2>
                         <p id="high-pt"></p>
                     </div>
                     
                     <div class="avg-pt">
-                        Average PT
+                        <h2>Average PT</h2>
                         <p id="avg-pt"></p>
                     </div>
                     
                     <div class="low-pt" >
-                        Low PT
+                        <h2>Low PT</h2>
                         <p id="low-pt"></p>
                     </div>
                 </div>
@@ -84,49 +88,49 @@
                 FINANCIAL DATA
                 <div class="financial-data-container">
                     <div class="column-1">
-                        <h3 class="column-title">Valuation Multiples</h3>
+                        <h2 class="column-title">Valuation Multiples</h2>
                         <div class="data-A" >
-                            Enterprise Value to Revenue
+                            <h4>Enterprise Value to Revenue</h4>
                             <p id="ev-to-rev"></p>
                         </div>
                         <div class="data-B" id="data-B">
-                            Price to Sales
+                            <h4>Price to Sales</h4>
                             <p id="price-to-sales"></p>
                         </div>
                         <div class="data-C" id="data-C">
-                            PEG Ratio
+                            <h4>PEG Ratio</h4>
                             <p id="peg-ratio"></p>
                         </div>
                     </div>
                     
                     <div class="column-2">
-                        <h3 class="column-title">Relevant Trading Data</h3>
+                        <h2 class="column-title">Relevant Trading Data</h2>
                         <div class="data-D" id="data-D">
-                            Beta
+                            <h4>Beta</h4>
                             <p id="beta"></p>
                         </div>
                         <div class="data-E" id="data-E">
-                            Avg. 10 Day Trading Volume
+                            <h4>Avg. 10 Day Trading Volume</h4>
                             <p id="avg-10day-vol"></p>
                         </div>
                         <div class="data-F" id="data-F">
-                            Avg. 30 Day Trading Volume
+                            <h4>Avg. 30 Day Trading Volume</h4>
                             <p id="avg-30day-vol"></p>
                         </div>
                     </div>
                     
                     <div class="column-3">
-                        <h3 class="column-title">Financials</h3>
+                        <h2 class="column-title">Financials</h2>
                         <div class="data-G" id="data-G">
-                            Revenue per Employee
+                            <h4>Revenue per Employee</h4>
                             <p id="rev-per-employee"></p>
                         </div>
                         <div class="data-H" id="data-H">
-                            Profit Margin
+                            <h4>Profit Margin</h4>
                             <p id="profit-margin"></p>
                         </div>
                         <div class="data-I" id="data-I">
-                            Debt to Equity
+                            <h4>Debt to Equity</h4>
                             <p id="d-to-e"></p>
                         </div>
                     </div>
@@ -137,186 +141,7 @@
     
     <!-- <script src="./app.js"></script> -->
     <script>
-    const IEXtoken = ""; 
-    const SStoken = "";
-
-    document.addEventListener('keypress', e => {
-    if(e.key === 'Enter'){
-        const symbol = document.getElementById("ticker-input").value;
-        //check if the input is not blank
-        //pass the input into the first API call to get the stock quote data
-
-        //Social Sentiment Data
-        //grabbing industry id
-                fetch(`https://cors-anywhere.herokuapp.com/https://socialsentiment.io/api/v1/stocks/${symbol.toUpperCase()}/`, 
-                {
-                    headers: {
-                        Accept: "application/json",
-                        Authorization: `Token ${SStoken}`
-                    }
-                })
-                .then(res => res.json())
-                .then(data => {
-                    //grabbing industry sentiment data
-                    fetch(`https://cors-anywhere.herokuapp.com/https://socialsentiment.io/api/v1/industries/${data.industry_id}/sentiment/daily/`, 
-                    {
-                        headers: {
-                            Accept: "application/json",
-                            Authorization: "Token 3b6245845e1b07c7b6eb3fe4e3285837114951e4"
-                        }
-                    })
-                    .then(res => res.json())
-                    .then(industryData => {
-                        //grabbing sentiment data and making chart
-                        fetch(`https://cors-anywhere.herokuapp.com/https://socialsentiment.io/api/v1/stocks/${symbol.toUpperCase()}/sentiment/daily/`, 
-                        {
-                            headers: {
-                                Accept: "application/json",
-                                Authorization: "Token 3b6245845e1b07c7b6eb3fe4e3285837114951e4"
-                            }
-                        })
-                        .then(res => res.json())
-                        .then(data => {
-                            var ctx = document.getElementById('myChart').getContext('2d');
-                            var chart = new Chart(ctx, {
-                                // The type of chart we want to create
-                                type: 'line',
-                                // The data for our dataset
-                                data: {
-                                    labels: [
-                                        `${data[0].date}`, `${data[1].date}`, `${data[2].date}`, 
-                                        `${data[3].date}`, `${data[4].date}`, `${data[5].date}`, 
-                                        `${data[6].date}`, `${data[7].date}`],
-                                    datasets: [
-                                        {
-                                            label: 'Social Sentiment Activity',
-                                            backgroundColor: 'rgba(0,0,0,0)',
-                                            borderColor: 'rgb(106,45,92)',
-                                            yAxisID: 'A',
-                                            data: [`${data[0].activity}`, `${data[1].activity}`, `${data[2].activity}`, 
-                                            `${data[3].activity}`, `${data[4].activity}`, `${data[5].activity}`, 
-                                            `${data[6].activity}`, `${data[7].activity}`]
-                                        },
-                                        {
-                                            label: 'Social Sentiment Score',
-                                            backgroundColor: 'rgba(0,0,0,0)',
-                                            borderColor: 'rgb(255,84,118)',
-                                            yAxisID: 'B',
-                                            data: [`${data[0].score}`, `${data[1].score}`, `${data[2].score}`, 
-                                            `${data[3].score}`, `${data[4].score}`, `${data[5].score}`, 
-                                            `${data[6].score}`, `${data[7].score}`]
-                                        },
-                                        {
-                                            label: 'Industry Sentiment Activity',
-                                            backgroundColor: 'rgba(0,0,0,0)',
-                                            borderColor: 'rgb(29,58,20)',
-                                            yAxisID: 'A',
-                                            data: [`${industryData[0].activity}`, `${industryData[1].activity}`, `${industryData[2].activity}`, 
-                                            `${industryData[3].activity}`, `${industryData[4].activity}`, `${industryData[5].activity}`, 
-                                            `${industryData[6].activity}`, `${industryData[7].activity}`]
-                                        },
-                                        {
-                                            label: 'Industry Sentiment Score',
-                                            backgroundColor: 'rgba(0,0,0,0)',
-                                            borderColor: 'rgb(130,212,187)',
-                                            yAxisID: 'B',
-                                            data: [`${industryData[0].score}`, `${industryData[1].score}`, `${industryData[2].score}`, 
-                                            `${industryData[3].score}`, `${industryData[4].score}`, `${industryData[5].score}`, 
-                                            `${industryData[6].score}`, `${industryData[7].score}`]
-                                        },
-                                    ]
-                                },
-
-                                // Configuration options go here
-                                options: {
-                                    scales: {
-                                        xAxes: [{
-                                            gridLines: {
-                                                display:false
-                                            }
-                                        }],
-                                        yAxes: [
-                                            {
-                                                id: 'A',
-                                                type: 'linear',
-                                                position: 'left',
-                                                scaleLabel:{
-                                                    display: true,
-                                                    labelString: 'Activity'
-                                                },
-                                                gridLines: {
-                                                    display:false
-                                                }
-                                            }, 
-                                            {
-                                                id: 'B',
-                                                type: 'linear',
-                                                position: 'right',
-                                                scaleLabel:{
-                                                    display: true,
-                                                    labelString: 'Score'
-                                                },
-                                                gridLines: {
-                                                    display:false
-                                                }
-                                            }
-                                        ]
-                                    }
-                                }
-                            });
-                        })
-                    })
-                })
-                //end of sentiment data fetching and charting
-
-        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${IEXtoken}`)
-            .then((response) => response.json())
-            .then(data => {
-                document.getElementById("current-price-output").innerHTML=`$${data.iexClose}`;
-            });
-        //Advanced Stats -- 
-        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/advanced-stats?token=${IEXtoken}`)
-            .then((response) => response.json())
-            .then(data => {
-                // debugger
-                document.getElementById("ev-to-rev").innerHTML=`${data.enterpriseValueToRevenue}x`;
-                document.getElementById("price-to-sales").innerHTML=`${parseFloat(data.priceToSales.toFixed(2))}x`;
-                document.getElementById("peg-ratio").innerHTML=`${parseFloat(data.pegRatio).toFixed(2)}x`;
-                document.getElementById("beta").innerHTML=`${parseFloat(data.beta).toFixed(2)}`;
-                document.getElementById("profit-margin").innerHTML=`${(data.profitMargin * 100).toFixed(3)}%`;
-                document.getElementById("d-to-e").innerHTML=`${parseFloat(data.debtToEquity).toFixed(2)}`;
-                document.getElementById("rev-per-employee").innerHTML=`$${data.revenuePerEmployee}`;
-            });
-        //Key Stats -- 
-        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/stats?token=${IEXtoken}`)
-            .then((response) => response.json())
-            .then(data => {
-                document.getElementById("avg-10day-vol").innerHTML=data.avg10Volume;
-                document.getElementById("avg-30day-vol").innerHTML=data.avg30Volume;
-            });
-
-        //Analyst Recommendations -- 
-        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/recommendation-trends?token=${IEXtoken}`)
-            .then((response) => response.json())
-            .then(data => {
-                document.getElementById("buy-rating-body").innerHTML=data[data.length-1].ratingBuy + data[data.length-1].ratingOverweight;
-                document.getElementById("hold-rating-body").innerHTML=data[data.length-1].ratingHold;
-                document.getElementById("sell-rating-body").innerHTML=data[data.length-1].ratingSell + data[data.length-1].ratingUnderweight;
-                document.getElementById("#analysts").innerHTML=
-                    data[data.length-1].ratingSell + data[data.length-1].ratingUnderweight + data[data.length-1].ratingBuy + data[data.length-1].ratingOverweight
-                    + data[data.length-1].ratingHold;
-            });
-
-        //Price Targets
-        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/price-target?token=${IEXtoken}`)
-            .then((response) => response.json())
-            .then(data => {
-                document.getElementById("high-pt").innerHTML=`$${data.priceTargetHigh.toFixed(0)}`;
-                document.getElementById("avg-pt").innerHTML=`$${data.priceTargetAverage.toFixed(0)}`;
-                document.getElementById("low-pt").innerHTML=`$${data.priceTargetLow.toFixed(0)}`;
-            });
-    }
-})
+        
     </script>
 </body>
 </html>
