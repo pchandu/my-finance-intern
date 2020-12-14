@@ -14,7 +14,7 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/pchandu/-my-finance-intern/issues"
+    "url": "https://github.com/pchandu/my-finance-intern/issues"
   },
   "browserslist": [
     "last 1 version",
@@ -36,6 +36,6 @@
   },
   "dependencies": {
     "node-fetch": "^2.6.1",
-    "script-loader": "^0.7.2",
+    "script-loader": "^0.7.2"
   }
 }

@@ -11,19 +11,37 @@
      width: 100%;
      height: 100%;
      /* background: #FFF8F0; */
-     background-color: #FFFAF1;
+    background-color: #FFFAF1;
     font-family: 'Bebas Neue',
     cursive;
     display: flex;
     /* flex-direction: column; */
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
      /* color: #CC313D; */
     color: #29293a;
 }
 
+.misc-info-container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: flex-end;
+}
 .info-guide-container{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    justify-content: center;
+    border: 3px solid black;
+    /* text-align: center; */
+    margin: 15px;
+    padding: 10px;
+    border-radius: 12px;
+}
 
+.info-header{
+    font-size: x-large;
 }
 
 .app-container{
@@ -119,6 +137,12 @@ h4{
     sans-serif;
     font-size: small;
 }
+h5{
+    color: #2B4E6B;
+    font-family: 'Roboto Condensed',
+    sans-serif;
+    font-size: medium;
+}
 
 div {
     font-family: 'Bebas Neue',
@@ -147,6 +171,7 @@ div {
     justify-content: center;
     padding: 5px;
     height: 100%;
+    border-bottom: black solid 3px;
 }
 /* ANALYST RECOMMENDATION BREAKDOWN  */
 .analyst-recommendations{
@@ -157,7 +182,7 @@ div {
      justify-content: space-around;
      width: 100%;
      flex-direction: column;
-     border-bottom: black solid 3px;
+     
      text-align: center;
      height: 190px;
 }
@@ -204,7 +229,6 @@ div {
 /* PRICE TARGET BREAKDOWN  */
 .price-targets{
     padding: 5px;
-    border-bottom: black solid 3px;
     font-size: xx-large;
     display: flex;
     align-items: center;
@@ -267,5 +291,11 @@ div {
     justify-content: flex-end;
 }
 img {
-    height: 100px;
+    height: 50px;
+    padding: 10px;
+}
+
+.about-me-container{
+    display: flex;
+    /* justify-content: flex-end; */
 }
