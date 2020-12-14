@@ -13,6 +13,9 @@
 
 <body>
     <div class="site-container">
+        <div class="info-guide-container">
+
+        </div>
         <div class="app-container">
             <div class="company-basic-info">
                 <div class="ticker-container">
@@ -32,7 +35,7 @@
             
             <div class="social-sentiment-container" >
                 SOCIAL SENTIMENT CHART
-                <canvas id="myChart" width="550" height="200"></canvas>
+                <canvas id="myChart" width="550" height="175"></canvas>
             </div>
 
             <div class="wall-street-sentiment-container">
@@ -136,11 +139,23 @@
                 </div>
             </div>
         </div>
+        <div class="about-me-container">
+            <div class="links">
+                <a href="https://github.com/pchandu">
+                    <img src="imgs/githublogo.png" alt="Github">
+                </a>
+                <a href="https://www.linkedin.com/in/praneethch/">
+                    <img src="imgs/linlogo.png" alt="Linked-In">
+                </a>
+            </div>
+        </div>
     </div>
     
+    <script type="text/javascript" src="bundle.js"></script>
     <!-- <script src="./app.js"></script> -->
-    <script>
-    
+    <!-- <script>
+    const IEXtoken = "sk_26d151b214a34fc3bef7ad9d7a47d636"; 
+    const SStoken = "e3eff2d2243dd84d557236156fa1b8d2692b2b7c";
 
     document.addEventListener('keypress', e => {
     if(e.key === 'Enter'){
@@ -336,6 +351,6 @@
     }
     }
 })
-    </script>
+    </script> -->
 </body>
 </html>

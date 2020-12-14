@@ -1,7 +1,10 @@
-const fetch = require('node-fetch');
-global.fetch = require("node-fetch");
-const IEXtoken = process.env.IEX; 
-const SStoken = process.env.SENTI
+// const fetch = require('node-fetch');
+// global.fetch = require("node-fetch");
+// const IEXtoken = process.env.IEX; 
+// const SStoken = process.env.SENTI;
+import keys from './keys';
+const IEXtoken = ""; 
+const SStoken = "";
 
 document.addEventListener('keypress', e => {
     if(e.key === 'Enter'){
@@ -40,7 +43,7 @@ document.addEventListener('keypress', e => {
                     {
                         headers: {
                             Accept: "application/json",
-                            Authorization: "Token 3b6245845e1b07c7b6eb3fe4e3285837114951e4"
+                            Authorization: `Token ${SStoken}`
                         }
                     })
                     .then(res => res.json())
@@ -50,7 +53,7 @@ document.addEventListener('keypress', e => {
                         {
                             headers: {
                                 Accept: "application/json",
-                                Authorization: "Token 3b6245845e1b07c7b6eb3fe4e3285837114951e4"
+                                Authorization: `Token ${SStoken}`
                             }
                         })
                         .then(res => res.json())

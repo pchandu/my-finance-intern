@@ -14,12 +14,16 @@
      background-color: #FFFAF1;
     font-family: 'Bebas Neue',
     cursive;
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     align-items: center;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
      /* color: #CC313D; */
     color: #29293a;
+}
+
+.info-guide-container{
+
 }
 
 .app-container{
@@ -28,7 +32,7 @@
     border: 3px solid black;
     border-radius: 12px;
     border-style: ridge;
-    padding: 5px;
+    /* padding: 5px; */
     /* background-color: #F7C5CC; */
     background-color: white;
 
@@ -53,7 +57,7 @@
 .ticker-container{
     display: flex;
     flex-direction: column;
-    padding: 15px;
+    padding: 5px;
     border-right: black solid 3px;
     align-items: center;
 }
@@ -66,17 +70,23 @@
     border-radius: 10px;
     /* color: white; */
     color: #29293a;
-    font-family: 'Karma',
-    serif;
+    font-family: 'Roboto Condensed',
+    sans-serif;
     border-style: none;
     background-color: #FFFAF1;
 }
 /* CURRENT PRICE OUTPUT  */
 .current-price-container{
-    padding: 15px;
+    padding: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.company-name{
+    width: 250px;
+    height: fit-content;
+    text-align: center;
 }
 
 p {
@@ -144,12 +154,12 @@ div {
      font-size: xx-large;
      display: flex;
      align-items: center;
-     justify-content: center;
+     justify-content: space-around;
      width: 100%;
      flex-direction: column;
      border-bottom: black solid 3px;
      text-align: center;
-     height: inherit;
+     height: 190px;
 }
 
 .ratings-container{
@@ -249,24 +259,13 @@ div {
 .column-title{
     margin: 5px;
 }
-/* A,B,C  */
-/* .column-1{
-    padding: 5px;
-} */
 
-/* D,E,F  */
-/* .column-2{
-    padding: 5px;
-} */
-
-/* G,H,I  */
-/* .column-3{
-    padding: 5px;
-} */
-
-/* Section Five */
-/* NEXT EARNINGS DATE */
-.earnings-data{
-    padding: 5px;
+.links{
+    display: flex;
+    padding: 10px;
+    height: 100%;
+    justify-content: flex-end;
 }
-
+img {
+    height: 100px;
+}
