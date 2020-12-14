@@ -1,1 +1,2 @@
 api.key filter=git-crypt diff=git-crypt
+senti.key filter=git-crypt diff=git-crypt
