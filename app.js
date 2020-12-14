@@ -4,8 +4,6 @@ require('dotenv').config();
 const IEXtoken = process.env.IEX; 
 const SStoken = procss.env.SENTI;
 
-console.log(process.env)
-
 // const IEXtoken = ""; 
 // const SStoken = "";
 
