@@ -1,10 +1,11 @@
 // const fetch = require('node-fetch');
 // global.fetch = require("node-fetch");
-// const IEXtoken = process.env.IEX; 
-// const SStoken = process.env.SENTI;
-import keys from './keys';
-const IEXtoken = ""; 
-const SStoken = "";
+const IEXtoken = secrets.IEX; 
+const SStoken = secrets.SENTI;
+require('dotenv').config();
+
+// const IEXtoken = ""; 
+// const SStoken = "";
 
 document.addEventListener('keypress', e => {
     if(e.key === 'Enter'){
@@ -70,7 +71,7 @@ document.addEventListener('keypress', e => {
                                         `${data[6].date}`, `${data[7].date}`],
                                     datasets: [
                                         {
-                                            label: 'Social Sentiment Activity',
+                                            label: 'Stock Sentiment Activity',
                                             backgroundColor: 'rgba(0,0,0,0)',
                                             borderColor: 'rgb(106,45,92)',
                                             yAxisID: 'A',
@@ -79,7 +80,7 @@ document.addEventListener('keypress', e => {
                                             `${data[6].activity}`, `${data[7].activity}`]
                                         },
                                         {
-                                            label: 'Social Sentiment Score',
+                                            label: 'Stock Sentiment Score',
                                             backgroundColor: 'rgba(0,0,0,0)',
                                             borderColor: 'rgb(255,84,118)',
                                             yAxisID: 'B',
