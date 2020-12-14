@@ -1,4 +1,4 @@
-A financial data aggregator to help you make better trades by getting sense of social and corporate sentiment.
+My Finance Intern is a financial data aggregator to help you make better trades by getting sense of social and corporate sentiment.
 
 This website was created to help people get a sense of a stock's social and corporate sentiment before making a trade.
 
