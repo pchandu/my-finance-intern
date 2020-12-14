@@ -1,11 +1,11 @@
 // const fetch = require('node-fetch');
 // global.fetch = require("node-fetch");
 // require('dotenv').config();
-const IEXtoken = process.env.IEX; 
-const SStoken = procss.env.SENTI;
+// const IEXtoken = process.env.IEX; 
+// const SStoken = procss.env.SENTI;
 
-// const IEXtoken = ""; 
-// const SStoken = "";
+const IEXtoken = ""; 
+const SStoken = "";
 
 document.addEventListener('keypress', e => {
     if(e.key === 'Enter'){
