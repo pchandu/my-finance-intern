@@ -1,8 +1,10 @@
 // const fetch = require('node-fetch');
 // global.fetch = require("node-fetch");
-const IEXtoken = secrets.IEX; 
-const SStoken = secrets.SENTI;
 require('dotenv').config();
+const IEXtoken = process.env.IEX; 
+const SStoken = procss.env.SENTI;
+
+console.log(process.env)
 
 // const IEXtoken = ""; 
 // const SStoken = "";
