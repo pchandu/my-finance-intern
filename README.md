@@ -8,4 +8,4 @@ Corporate sentiment is measured by Wall Street Analyst recommendations and price
 
 Ratings, price targets, and financial data are all provided by IEXCloud.
 
-![alt-text](https://github.com/AlexArchibeque/Fwitch/blob/main/app/assets/images/gifsforFwitch/signup-page.png "Signup Modal")
+![alt-text](https://github.com/pchandu/my-finance-intern/blob/main/imgs/example.png "Example")
