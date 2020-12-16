@@ -1,12 +1,13 @@
 // const fetch = require('node-fetch');
 // global.fetch = require("node-fetch");
-// require('dotenv').config();
+require('dotenv').config();
 // const IEXtoken = process.env.IEX; 
-// const SStoken = procss.env.SENTI;
+// const SStoken = process.env.SENTI;
 
-const IEXtoken = ""; 
-const SStoken = "";
-
+const IEXtoken = "sk_a63b3c4b777b4f21a95bebb96e41c92f"; 
+const SStoken = "9894333eef0d3acad87d56495d3f07c177763f2e";
+// console.log("hello");
+// console.log(process.env);
 document.addEventListener('keypress', e => {
     if(e.key === 'Enter'){
         const symbol = document.getElementById("ticker-input").value;
