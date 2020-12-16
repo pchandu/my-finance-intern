@@ -4,7 +4,8 @@ const port = process.env.PORT || 3000;
 
 const app = express();
 
-// app.use("/styles/global.css")
+app.use(express.static(__dirname));
+
 app.get("/", (req, res) => {
     // res.send( "Hello From Express" );
     res.sendFile(path.resolve(__dirname, 'index.html'));
