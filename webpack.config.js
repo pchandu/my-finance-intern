@@ -3,7 +3,7 @@ var dotenv = require('dotenv').config({path: __dirname + '/.env'});
 
 module.exports = {
     context: __dirname,
-    entry: "./bundle.js",
+    entry: "./app.js",
     output: {
       path: path.resolve(__dirname, "./"),
       filename: "webpack.js",
