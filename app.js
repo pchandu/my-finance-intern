@@ -148,17 +148,13 @@
                     })
                     //end of sentiment data fetching and charting
 
-            fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${IEX}`, {
-                headers: {Referer: "https://pchandu.github.io/my-finance-intern/"}
-            })
+            fetch(`https://my-finance-intern.herokuapp.com/https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${IEX}`)
                 .then((response) => response.json())
                 .then(data => {
                     document.getElementById("current-price-output").innerHTML=`$${data.iexClose}`;
                 });
             //Advanced Stats -- 
-            fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/advanced-stats?token=${IEX}`, {
-                headers: {Referer: "https://pchandu.github.io/my-finance-intern/"}
-            })
+            fetch(`https://my-finance-intern.herokuapp.com/https://cloud.iexapis.com/stable/stock/${symbol}/advanced-stats?token=${IEX}`)
                 .then((response) => response.json())
                 .then(data => {
                     // debugger
@@ -171,9 +167,7 @@
                     document.getElementById("rev-per-employee").innerHTML=`$${data.revenuePerEmployee}`;
                 });
             //Key Stats -- 
-            fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/stats?token=${IEX}`, {
-                headers: {Referer: "https://pchandu.github.io/my-finance-intern/"}
-            })
+            fetch(`https://my-finance-intern.herokuapp.com/https://cloud.iexapis.com/stable/stock/${symbol}/stats?token=${IEX}`)
                 .then((response) => response.json())
                 .then(data => {
                     document.getElementById("avg-10day-vol").innerHTML=data.avg10Volume;
@@ -182,9 +176,7 @@
                 });
 
             //Analyst Recommendations -- 
-            fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/recommendation-trends?token=${IEX}`, {
-                headers: {Referer: "https://pchandu.github.io/my-finance-intern/"}
-            })
+            fetch(`https://my-finance-intern.herokuapp.com/https://cloud.iexapis.com/stable/stock/${symbol}/recommendation-trends?token=${IEX}`)
                 .then((response) => response.json())
                 .then(data => {
                     document.getElementById("buy-rating-body").innerHTML=data[data.length-1].ratingBuy + data[data.length-1].ratingOverweight;
@@ -196,9 +188,7 @@
                 });
 
             //Price Targets
-            fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/price-target?token=${IEX}`, {
-                headers: {Referer: "https://pchandu.github.io/my-finance-intern/"}
-            })
+            fetch(`https://my-finance-intern.herokuapp.com/https://cloud.iexapis.com/stable/stock/${symbol}/price-target?token=${IEX}`)
                 .then((response) => response.json())
                 .then(data => {
                     document.getElementById("high-pt").innerHTML=`$${data.priceTargetHigh.toFixed(0)}`;

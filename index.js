@@ -6,7 +6,7 @@ const app = express();
 
 app.use(express.static(__dirname));
 
-app.get('/apiKeys', (req, res) => {
+app.delete('/apiKeys', (req, res) => {
     if (process.env.NODE_ENV === 'production') {
         res.send ({
             IEX: process.env.IEX,
@@ -16,7 +16,6 @@ app.get('/apiKeys', (req, res) => {
         res.send("at least this works")
     }
 })
-
 
 app.get("/", (req, res) => {
     // res.send( "Hello From Express" );
