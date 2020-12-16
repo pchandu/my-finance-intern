@@ -1,8 +1,4 @@
-/gameplan.txt
 /node_modules
 /.env
-/keys.js
-/webpack.config.js
-/bundle.js
-/app.js
-/bundle.js
+bundle.js
+app.js

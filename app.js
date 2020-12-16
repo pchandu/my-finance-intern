@@ -1,12 +1,5 @@
-// const fetch = require('node-fetch');
-// global.fetch = require("node-fetch");
-// require('dotenv').config();
-
-// const IEX = process.env.IEX; 
-// const SS = process.env.SENTI;
-
-const IEX = "pk_798e656bccd44e809f829740f04ed86a"; 
-const SS = "9894333eef0d3acad87d56495d3f07c177763f2e";
+const IEX = "pk_798e656bccd44e809f829740f04ed86a"; //restricted to my domain, try me
+const SS = "9894333eef0d3acad87d56495d3f07c177763f2e"; //free api key. get your own plz
 
 document.addEventListener('keypress', e => {
     if(e.key === 'Enter'){
