@@ -3,10 +3,9 @@
     let IEX = "";
     let SS = ""; //free api key. get your own plz
 
-    if (process.env.NODE_ENV === 'production') {
-        IEX = process.env.IEX; 
-        SS = process.env.SENTI;
-    } 
+    document.addEventListener("DOMContentLoaded", () => {
+        
+    })
     
     document.addEventListener('keypress', e => {
         if(e.key === 'Enter'){
