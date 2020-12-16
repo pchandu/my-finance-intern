@@ -6,7 +6,7 @@
 // const IEX = process.env.IEX; 
 // const SS = process.env.SENTI;
 
-const IEX = "sk_a63b3c4b777b4f21a95bebb96e41c92f"; 
+const IEX = "pk_798e656bccd44e809f829740f04ed86a"; 
 const SS = "9894333eef0d3acad87d56495d3f07c177763f2e";
 // console.log("hello");
 // console.log(process.env);
