@@ -8,8 +8,7 @@
 
 const IEX = "pk_798e656bccd44e809f829740f04ed86a"; 
 const SS = "9894333eef0d3acad87d56495d3f07c177763f2e";
-// console.log("hello");
-// console.log(process.env);
+
 document.addEventListener('keypress', e => {
     if(e.key === 'Enter'){
         const symbol = document.getElementById("ticker-input").value;
@@ -28,9 +27,6 @@ document.addEventListener('keypress', e => {
             document.getElementById("avg-pt").innerHTML="INVALID";
             document.getElementById("low-pt").innerHTML="INVALID";
         } else {
-        //check if the input is not blank
-        //pass the input into the first API call to get the stock quote data
-
         //Social Sentiment Data
         //grabbing industry id
                 fetch(`https://cors-anywhere.herokuapp.com/https://socialsentiment.io/api/v1/stocks/${symbol.toUpperCase()}/`, 
