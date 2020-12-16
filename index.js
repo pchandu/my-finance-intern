@@ -1,18 +1,13 @@
 const express = require( "express" );
-
+const path = require("path");
 const port = process.env.PORT || 3000;
 
-const logRequest = (req, res, next) => {
-  console.log(req);
-  next();
-}
-
 const app = express();
-app.use(logRequest);
 
+// app.use("/styles/global.css")
 app.get("/", (req, res) => {
-    res.send( "Hello From Express" );
-    app.use(express.static('./index.html'));
+    // res.send( "Hello From Express" );
+    res.sendFile(path.resolve(__dirname, 'index.html'));
 });
 
 app.listen(port, () => {
