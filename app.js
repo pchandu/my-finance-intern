@@ -1,12 +1,12 @@
 // const fetch = require('node-fetch');
 // global.fetch = require("node-fetch");
-require('dotenv').config();
-// require('process');
-// const IEXtoken = process.env.IEX; 
-// const SStoken = process.env.SENTI;
+// require('dotenv').config();
 
-const IEXtoken = "sk_a63b3c4b777b4f21a95bebb96e41c92f"; 
-const SStoken = "9894333eef0d3acad87d56495d3f07c177763f2e";
+// const IEX = process.env.IEX; 
+// const SS = process.env.SENTI;
+
+const IEX = "sk_a63b3c4b777b4f21a95bebb96e41c92f"; 
+const SS = "9894333eef0d3acad87d56495d3f07c177763f2e";
 // console.log("hello");
 // console.log(process.env);
 document.addEventListener('keypress', e => {
@@ -36,7 +36,7 @@ document.addEventListener('keypress', e => {
                 {
                     headers: {
                         Accept: "application/json",
-                        Authorization: `Token ${SStoken}`
+                        Authorization: `Token ${SS}`
                     }
                 })
                 .then(res => res.json())
@@ -46,7 +46,7 @@ document.addEventListener('keypress', e => {
                     {
                         headers: {
                             Accept: "application/json",
-                            Authorization: `Token ${SStoken}`
+                            Authorization: `Token ${SS}`
                         }
                     })
                     .then(res => res.json())
@@ -56,7 +56,7 @@ document.addEventListener('keypress', e => {
                         {
                             headers: {
                                 Accept: "application/json",
-                                Authorization: `Token ${SStoken}`
+                                Authorization: `Token ${SS}`
                             }
                         })
                         .then(res => res.json())
@@ -153,13 +153,13 @@ document.addEventListener('keypress', e => {
                 })
                 //end of sentiment data fetching and charting
 
-        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${IEXtoken}`)
+        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${IEX}`)
             .then((response) => response.json())
             .then(data => {
                 document.getElementById("current-price-output").innerHTML=`$${data.iexClose}`;
             });
         //Advanced Stats -- 
-        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/advanced-stats?token=${IEXtoken}`)
+        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/advanced-stats?token=${IEX}`)
             .then((response) => response.json())
             .then(data => {
                 // debugger
@@ -172,7 +172,7 @@ document.addEventListener('keypress', e => {
                 document.getElementById("rev-per-employee").innerHTML=`$${data.revenuePerEmployee}`;
             });
         //Key Stats -- 
-        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/stats?token=${IEXtoken}`)
+        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/stats?token=${IEX}`)
             .then((response) => response.json())
             .then(data => {
                 document.getElementById("avg-10day-vol").innerHTML=data.avg10Volume;
@@ -181,7 +181,7 @@ document.addEventListener('keypress', e => {
             });
 
         //Analyst Recommendations -- 
-        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/recommendation-trends?token=${IEXtoken}`)
+        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/recommendation-trends?token=${IEX}`)
             .then((response) => response.json())
             .then(data => {
                 document.getElementById("buy-rating-body").innerHTML=data[data.length-1].ratingBuy + data[data.length-1].ratingOverweight;
@@ -193,7 +193,7 @@ document.addEventListener('keypress', e => {
             });
 
         //Price Targets
-        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/price-target?token=${IEXtoken}`)
+        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/price-target?token=${IEX}`)
             .then((response) => response.json())
             .then(data => {
                 document.getElementById("high-pt").innerHTML=`$${data.priceTargetHigh.toFixed(0)}`;
