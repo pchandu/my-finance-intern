@@ -142,13 +142,17 @@ document.addEventListener('keypress', e => {
                 })
                 //end of sentiment data fetching and charting
 
-        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${IEX}`)
+        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${IEX}`, {
+            referer: "https://pchandu.github.io/my-finance-intern/"
+        })
             .then((response) => response.json())
             .then(data => {
                 document.getElementById("current-price-output").innerHTML=`$${data.iexClose}`;
             });
         //Advanced Stats -- 
-        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/advanced-stats?token=${IEX}`)
+        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/advanced-stats?token=${IEX}`, {
+            referer: "https://pchandu.github.io/my-finance-intern/"
+        })
             .then((response) => response.json())
             .then(data => {
                 // debugger
@@ -161,7 +165,9 @@ document.addEventListener('keypress', e => {
                 document.getElementById("rev-per-employee").innerHTML=`$${data.revenuePerEmployee}`;
             });
         //Key Stats -- 
-        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/stats?token=${IEX}`)
+        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/stats?token=${IEX}`, {
+            referer: "https://pchandu.github.io/my-finance-intern/"
+        })
             .then((response) => response.json())
             .then(data => {
                 document.getElementById("avg-10day-vol").innerHTML=data.avg10Volume;
@@ -170,7 +176,9 @@ document.addEventListener('keypress', e => {
             });
 
         //Analyst Recommendations -- 
-        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/recommendation-trends?token=${IEX}`)
+        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/recommendation-trends?token=${IEX}`, {
+            referer: "https://pchandu.github.io/my-finance-intern/"
+        })
             .then((response) => response.json())
             .then(data => {
                 document.getElementById("buy-rating-body").innerHTML=data[data.length-1].ratingBuy + data[data.length-1].ratingOverweight;
@@ -182,7 +190,9 @@ document.addEventListener('keypress', e => {
             });
 
         //Price Targets
-        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/price-target?token=${IEX}`)
+        fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/price-target?token=${IEX}`, {
+            referer: "https://pchandu.github.io/my-finance-intern/"
+        })
             .then((response) => response.json())
             .then(data => {
                 document.getElementById("high-pt").innerHTML=`$${data.priceTargetHigh.toFixed(0)}`;
