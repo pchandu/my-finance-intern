@@ -143,7 +143,7 @@ document.addEventListener('keypress', e => {
                 //end of sentiment data fetching and charting
 
         fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/quote?token=${IEX}`, {
-            referer: "https://pchandu.github.io/my-finance-intern/"
+            headers: {Referer: "https://pchandu.github.io/my-finance-intern/"}
         })
             .then((response) => response.json())
             .then(data => {
@@ -151,7 +151,7 @@ document.addEventListener('keypress', e => {
             });
         //Advanced Stats -- 
         fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/advanced-stats?token=${IEX}`, {
-            referer: "https://pchandu.github.io/my-finance-intern/"
+            headers: {Referer: "https://pchandu.github.io/my-finance-intern/"}
         })
             .then((response) => response.json())
             .then(data => {
@@ -166,7 +166,7 @@ document.addEventListener('keypress', e => {
             });
         //Key Stats -- 
         fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/stats?token=${IEX}`, {
-            referer: "https://pchandu.github.io/my-finance-intern/"
+            headers: {Referer: "https://pchandu.github.io/my-finance-intern/"}
         })
             .then((response) => response.json())
             .then(data => {
@@ -177,7 +177,7 @@ document.addEventListener('keypress', e => {
 
         //Analyst Recommendations -- 
         fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/recommendation-trends?token=${IEX}`, {
-            referer: "https://pchandu.github.io/my-finance-intern/"
+            headers: {Referer: "https://pchandu.github.io/my-finance-intern/"}
         })
             .then((response) => response.json())
             .then(data => {
@@ -191,7 +191,7 @@ document.addEventListener('keypress', e => {
 
         //Price Targets
         fetch(`https://cloud.iexapis.com/stable/stock/${symbol}/price-target?token=${IEX}`, {
-            referer: "https://pchandu.github.io/my-finance-intern/"
+            headers: {Referer: "https://pchandu.github.io/my-finance-intern/"}
         })
             .then((response) => response.json())
             .then(data => {
@@ -202,19 +202,3 @@ document.addEventListener('keypress', e => {
     }
     }
 })
-
-
-
-// const path = require('path')
-// const PORT = process.env.PORT || 8000; 
-
-// app.get('/', (request, res) => {
-//   res.sendFile(path.join(__dirname, './public/index.html'))
-// })
-
-// app.listen(PORT, () => {
-//     console.log(__dirname);
-//     console.log(`listening on ${PORT}`)
-// })
-
-// app.use(express.static('public'))
