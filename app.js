@@ -1,11 +1,5 @@
-
-    
-    let IEX = "pk_798e656bccd44e809f829740f04ed86a";
-    let SS = "9894333eef0d3acad87d56495d3f07c177763f2e"; //free api key. get your own plz
-
-    document.addEventListener("DOMContentLoaded", () => {
-        
-    })
+    const IEX = "pk_798e656bccd44e809f829740f04ed86a"; 
+    const SS = "9894333eef0d3acad87d56495d3f07c177763f2e"; //free api key. get your own plz
     
     document.addEventListener('keypress', e => {
         if(e.key === 'Enter'){
