@@ -1,7 +1,7 @@
 @import url('./reset.css');
 
 .site-container{
-     position:fixed;
+     /* position:fixed; */
      padding:0;
      margin:0;
 
@@ -15,11 +15,16 @@
     font-family: 'Bebas Neue',
     cursive;
     display: flex;
-    /* flex-direction: column; */
+    flex-direction: column;
     /* justify-content: center; */
     align-items: center;
      /* color: #CC313D; */
     color: #29293a;
+}
+
+.info-directions{
+    font-size: xx-large;
+    padding: 20px;
 }
 
 .misc-info-container{
